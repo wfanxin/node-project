@@ -14,6 +14,11 @@ const routes = [
       {
         path: '/categories/list',
         component: () => import('../views/CategoryList.vue')
+      },
+      {
+        path: '/categories/edit/:id',
+        component: () => import('../views/CategoryEdit.vue'),
+        props: true // 参数注入到页面
       }
     ]
   }
