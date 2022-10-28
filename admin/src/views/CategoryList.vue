@@ -6,7 +6,7 @@
             <el-table-column prop="name" label="分类名称" />
             <el-table-column fixed="right" label="Operations" width="120">
                 <template #default="scope">
-                    <el-button link type="primary" size="small" @click.prevent="edit(scope.row)">Edit</el-button>
+                    <el-button link type="primary" size="small" @click.prevent="edit(scope.row)">编辑</el-button>
                 </template>
             </el-table-column>
         </el-table>

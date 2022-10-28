@@ -36,7 +36,7 @@
         </div>
       </el-header>
 
-      <el-main>
+      <el-main style="padding: 0 20px;">
         <router-view />
       </el-main>
     </el-container>

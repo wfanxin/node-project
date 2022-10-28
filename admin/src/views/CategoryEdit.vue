@@ -6,7 +6,7 @@
             <el-input v-model="form.name" />
             </el-form-item>
             <el-form-item>
-            <el-button type="primary" @click="onSubmit">Create</el-button>
+            <el-button type="primary" @click="onSubmit">提交</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -36,15 +36,27 @@ const fetch = (id) => {
 }
 
 const onSubmit = () => {
-  proxy.$http.post('categories', {
-    name: form.name
-  }).then(() => {
-    router.push('/categories/list')
-    ElMessage({
-        message: '操作成功',
-        type: 'success',
+  if (props.id) {
+    proxy.$http.put(`categories/${props.id}`, {
+      name: form.name
+    }).then(() => {
+      router.push('/categories/list')
+      ElMessage({
+          message: '操作成功',
+          type: 'success',
+      })
     })
-  })
+  } else {
+    proxy.$http.post('categories', {
+      name: form.name
+    }).then(() => {
+      router.push('/categories/list')
+      ElMessage({
+          message: '操作成功',
+          type: 'success',
+      })
+    })
+  }
 }
 
 props.id && fetch(props.id)
