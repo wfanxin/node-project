@@ -5,12 +5,17 @@
         <el-menu router :default-openeds="['1', '3']">
           <el-sub-menu index="1">
             <template #title>
-              <el-icon><message /></el-icon>内容管理
+              <el-icon><notebook /></el-icon>内容管理
             </template>
             <el-menu-item-group>
               <template #title>分类</template>
               <el-menu-item index="/categories/create">新建分类</el-menu-item>
               <el-menu-item index="/categories/list">分类列表</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template #title>物品</template>
+              <el-menu-item index="/items/create">新建物品</el-menu-item>
+              <el-menu-item index="/items/list">物品列表</el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
         </el-menu>
@@ -46,7 +51,7 @@
 
 <script setup>
 
-import { Message, Setting } from '@element-plus/icons-vue'
+import { Setting, Notebook } from '@element-plus/icons-vue'
 
 </script>
 

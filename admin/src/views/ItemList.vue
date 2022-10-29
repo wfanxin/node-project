@@ -1,10 +1,9 @@
 <template>
     <div>
-        <h1>分类列表</h1>
+        <h1>物品列表</h1>
         <el-table :data="data.tableData" style="width: 100%">
             <el-table-column prop="_id" label="ID" width="300" />
-            <el-table-column prop="parent.name" label="上级分类" />
-            <el-table-column prop="name" label="分类名称" />
+            <el-table-column prop="name" label="物品名称" />
             <el-table-column fixed="right" label="操作" width="120">
                 <template #default="scope">
                     <el-button link type="primary" size="small" @click.prevent="edit(scope.row)">编辑</el-button>
@@ -27,14 +26,14 @@ const data = reactive({
     tableData: []
 })
 const fetch = () => {
-    proxy.$http.get('rest/categories').then((res)=>{
+    proxy.$http.get('rest/items').then((res)=>{
         data.tableData = res.data
     })
 }
 fetch()
 
 const edit = (row) => {
-    router.push('/categories/edit/'+row._id)
+    router.push('/items/edit/'+row._id)
 }
 
 const remove = (row) => {
@@ -48,7 +47,7 @@ const remove = (row) => {
         }
     )
     .then(() => {
-        proxy.$http.delete('rest/categories/'+row._id).then(()=>{
+        proxy.$http.delete('rest/items/'+row._id).then(()=>{
             ElMessage({
                 message: '删除成功',
                 type: 'success',
