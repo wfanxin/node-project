@@ -16,47 +16,54 @@
 </template>
 
 <script setup>
-import { reactive, getCurrentInstance } from 'vue'
-import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
-const { proxy } = getCurrentInstance()
+    import { reactive, getCurrentInstance } from 'vue'
+    import { useRouter } from 'vue-router'
+    import { ElMessage, ElMessageBox } from 'element-plus'
 
-const router = useRouter();
+    const { proxy } = getCurrentInstance() // 获取当前实例
 
-const data = reactive({
-    tableData: []
-})
-const fetch = () => {
-    proxy.$http.get('rest/categories').then((res)=>{
-        data.tableData = res.data
+    const router = useRouter() // 获取router
+
+    // 定义对象变量
+    const data = reactive({
+        tableData: []
     })
-}
-fetch()
 
-const edit = (row) => {
-    router.push('/categories/edit/'+row._id)
-}
-
-const remove = (row) => {
-    ElMessageBox.confirm(
-        `是否确定要删除分类 "${row.name}"`,
-        '提示',
-        {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning',
-        }
-    )
-    .then(() => {
-        proxy.$http.delete('rest/categories/'+row._id).then(()=>{
-            ElMessage({
-                message: '删除成功',
-                type: 'success',
-            })
-            fetch()
+    // 定义列表函数
+    const fetch = () => {
+        proxy.$http.get('rest/categories').then((res)=>{
+            data.tableData = res.data
         })
-    })
-    .catch(() => {})
-}
+    }
+    
+    // 定义编辑函数
+    const edit = (row) => {
+        router.push(`/categories/edit/${row._id}`)
+    }
 
+    // 定义删除函数
+    const remove = (row) => {
+        ElMessageBox.confirm(
+            `是否确定要删除分类 "${row.name}"`,
+            '提示',
+            {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning',
+            }
+        )
+        .then(() => {
+            proxy.$http.delete(`rest/categories/${row._id}`).then(()=>{
+                ElMessage({
+                    message: '删除成功',
+                    type: 'success',
+                })
+                fetch()
+            })
+        })
+        .catch(() => {})
+    }
+
+    // 执行函数
+    fetch()
 </script>

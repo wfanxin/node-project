@@ -1,13 +1,15 @@
 const express = require('express')
+const cors = require('cors')
 
 const app = express()
 
-app.use(require('cors')())
-app.use(express.json())
+app.use(cors()) // 解决CORS跨域
+app.use(express.json()) // 调用 express.json() 解析带有 JSON 的传入请求
 
-require('./plugins/db')(app)
-require('./routes/admin')(app)
+require('./plugins/mongodb')(app) // 连接mongodb数据库
+require('./routes/admin')(app) // admin接口服务
 
+// 启动服务
 app.listen(3000, () => {
     console.log('http://localhost:3000')
 })

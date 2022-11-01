@@ -11,7 +11,7 @@ module.exports = app => {
     })
     router.get('/', async (req, res) => { // 获取列表
         const queryOptions = {}
-        if (req.Model.modelName === 'Category') {
+        if (req.Model.modelName === 'Category') { // 获取模型名称并判断
             queryOptions.populate = 'parent'
         }
         const items = await req.Model.find().setOptions(queryOptions).limit(10)
@@ -33,7 +33,7 @@ module.exports = app => {
     app.use('/admin/api/rest/:resource', async (req, res, next) => {
         // 中间件处理逻辑
         const modelName = inflection.classify(req.params.resource)
-        req.Model = require(`../../models/${modelName}`)
+        req.Model = require(`../../models/${modelName}`) // 加载对应的模型
         next()
     }, router)
 }
