@@ -36,4 +36,13 @@ module.exports = app => {
         req.Model = require(`../../models/${modelName}`) // 加载对应的模型
         next()
     }, router)
+
+    // 单文件上传
+    const muler = require('multer')
+    const upload = muler({dest: __dirname + '/../../uploads'})
+    app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+        const file = req.file
+        file.url = `http://localhost:3000/uploads/${file.filename}`
+        res.send(file)
+    })
 }
