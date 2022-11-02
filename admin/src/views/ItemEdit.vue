@@ -80,9 +80,9 @@
 
 <style>
     .avatar-uploader .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
+        width: 100px;
+        height: 100px;
+        display: block;
     }
 
     .avatar-uploader .el-upload {
@@ -101,8 +101,8 @@
     .el-icon.avatar-uploader-icon {
         font-size: 28px;
         color: #8c939d;
-        width: 178px;
-        height: 178px;
+        width: 100px;
+        height: 100px;
         text-align: center;
     }
 </style>

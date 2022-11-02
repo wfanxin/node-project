@@ -32,6 +32,19 @@ const routes = [
                 path: '/items/edit/:id',
                 component: () => import('../views/ItemEdit.vue'),
                 props: true // 参数注入到页面
+            },
+            {
+                path: '/heros/create',
+                component: () => import('../views/HeroEdit.vue')
+            },
+            {
+                path: '/heros/list',
+                component: () => import('../views/HeroList.vue')
+            },
+            {
+                path: '/heros/edit/:id',
+                component: () => import('../views/HeroEdit.vue'),
+                props: true // 参数注入到页面
             }
         ]
     }

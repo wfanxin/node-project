@@ -1,24 +1,31 @@
 <template>
     <el-container class="layout-container-demo" style="height: 100vh;">
-        <el-aside width="200px">
+        <el-aside width="220px">
+            
             <el-scrollbar>
-            <el-menu router :default-openeds="['1']">
-                <el-sub-menu index="1">
-                <template #title>
-                    <el-icon><notebook /></el-icon>内容管理
-                </template>
-                <el-menu-item-group>
-                    <template #title>分类</template>
-                    <el-menu-item index="/categories/create">新建分类</el-menu-item>
-                    <el-menu-item index="/categories/list">分类列表</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group>
-                    <template #title>物品</template>
-                    <el-menu-item index="/items/create">新建物品</el-menu-item>
-                    <el-menu-item index="/items/list">物品列表</el-menu-item>
-                </el-menu-item-group>
-                </el-sub-menu>
-            </el-menu>
+                <div class="title">后台管理</div>
+                <el-menu router :default-openeds="['1']">
+                    <el-sub-menu index="1">
+                        <template #title>
+                            <el-icon><notebook /></el-icon>内容管理
+                        </template>
+                        <el-menu-item-group>
+                            <template #title>分类</template>
+                            <el-menu-item index="/categories/create">新建分类</el-menu-item>
+                            <el-menu-item index="/categories/list">分类列表</el-menu-item>
+                        </el-menu-item-group>
+                        <el-menu-item-group>
+                            <template #title>物品</template>
+                            <el-menu-item index="/items/create">新建物品</el-menu-item>
+                            <el-menu-item index="/items/list">物品列表</el-menu-item>
+                        </el-menu-item-group>
+                        <el-menu-item-group>
+                            <template #title>英雄</template>
+                            <el-menu-item index="/heros/create">新建英雄</el-menu-item>
+                            <el-menu-item index="/heros/list">英雄列表</el-menu-item>
+                        </el-menu-item-group>
+                    </el-sub-menu>
+                </el-menu>
             </el-scrollbar>
         </el-aside>
 
@@ -26,16 +33,16 @@
             <el-header style="text-align: right; font-size: 12px;">
                 <div class="toolbar">
                     <el-dropdown>
-                    <el-icon style="margin-right: 8px; margin-top: 1px">
-                        <setting/>
-                    </el-icon>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                        <el-dropdown-item>View</el-dropdown-item>
-                        <el-dropdown-item>Add</el-dropdown-item>
-                        <el-dropdown-item>Delete</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
+                        <el-icon style="margin-right: 8px; margin-top: 1px">
+                            <setting/>
+                        </el-icon>
+                        <template #dropdown>
+                            <el-dropdown-menu>
+                            <el-dropdown-item>View</el-dropdown-item>
+                            <el-dropdown-item>Add</el-dropdown-item>
+                            <el-dropdown-item>Delete</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </template>
                     </el-dropdown>
                     <span>Wfanxin</span>
                 </div>
@@ -56,6 +63,15 @@
 </script>
 
 <style scoped>
+    .title{
+        background-color: var(--el-color-primary-light-3);
+        height: 60px;
+        line-height: 60px;
+        overflow: hidden;
+        text-align: center;
+        font-weight: bold;
+        color: #ffffff;
+    }
     .layout-container-demo .el-header {
         position: relative;
         background-color: var(--el-color-primary-light-5);
