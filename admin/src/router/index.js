@@ -45,6 +45,19 @@ const routes = [
                 path: '/heros/edit/:id',
                 component: () => import('../views/HeroEdit.vue'),
                 props: true // 参数注入到页面
+            },
+            {
+                path: '/articles/create',
+                component: () => import('../views/ArticleEdit.vue')
+            },
+            {
+                path: '/articles/list',
+                component: () => import('../views/ArticleList.vue')
+            },
+            {
+                path: '/articles/edit/:id',
+                component: () => import('../views/ArticleEdit.vue'),
+                props: true // 参数注入到页面
             }
         ]
     }
