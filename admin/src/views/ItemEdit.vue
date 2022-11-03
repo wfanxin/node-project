@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ props.id ? '编辑' : '新建' }}物品</h1>
-        <el-form :model="form" label-width="200px" style="max-width: 400px">
+        <el-form :model="form" label-width="200px" style="max-width: 1000px">
             <el-form-item label="名称">
                 <el-input v-model="form.name" />
             </el-form-item>

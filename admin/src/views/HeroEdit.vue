@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ props.id ? '编辑' : '新建' }}英雄</h1>
-        <el-form :model="form" label-width="150px">
+        <el-form :model="form" label-width="150px" style="max-width: 1000px">
             <el-tabs v-model="activeName" type="border-card">
                 <el-tab-pane label="基础信息" name="基础信息">
                     <el-form-item label="名称">
@@ -181,7 +181,6 @@
     }
 
     let activeName = ref('基础信息')
-    activeName = '技能'
 
     // 执行函数
     fetchCategories()

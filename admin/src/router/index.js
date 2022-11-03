@@ -58,6 +58,32 @@ const routes = [
                 path: '/articles/edit/:id',
                 component: () => import('../views/ArticleEdit.vue'),
                 props: true // 参数注入到页面
+            },
+            {
+                path: '/ads/create',
+                component: () => import('../views/AdEdit.vue')
+            },
+            {
+                path: '/ads/list',
+                component: () => import('../views/AdList.vue')
+            },
+            {
+                path: '/ads/edit/:id',
+                component: () => import('../views/AdEdit.vue'),
+                props: true // 参数注入到页面
+            },
+            {
+                path: '/admin_users/create',
+                component: () => import('../views/AdminUserEdit.vue')
+            },
+            {
+                path: '/admin_users/list',
+                component: () => import('../views/AdminUserList.vue')
+            },
+            {
+                path: '/admin_users/edit/:id',
+                component: () => import('../views/AdminUserEdit.vue'),
+                props: true // 参数注入到页面
             }
         ]
     }

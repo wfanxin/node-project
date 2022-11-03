@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>{{ props.id ? '编辑' : '新建' }}文章</h1>
-        <el-form :model="form" label-width="200px" style="max-width: 400px">
+        <el-form :model="form" label-width="200px" style="max-width: 1000px">
             <el-form-item label="所属分类">
                 <el-select v-model="form.categories" multiple>
                     <el-option :key="item._id" :label="item.name" :value="item._id" v-for="item in data.categories" />
@@ -9,6 +9,15 @@
             </el-form-item>
             <el-form-item label="标题">
                 <el-input v-model="form.title" />
+            </el-form-item>
+            <el-form-item label="详情">
+                <vue-editor
+                    id="editor"
+                    useCustomImageHandler
+                    @image-added="handleImageAdded"
+                    v-model="form.body"
+                >
+                </vue-editor>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -21,6 +30,7 @@
     import { reactive, getCurrentInstance, defineProps } from 'vue'
     import { useRouter } from 'vue-router'
     import { ElMessage } from 'element-plus'
+    import { VueEditor } from "vue3-editor"
 
     const { proxy } = getCurrentInstance() // 获取当前实例
 
@@ -44,6 +54,7 @@
         proxy.$http.get(`rest/articles/${id}`).then((res)=>{
             form.title = res.data.title
             form.categories = res.data.categories
+            form.body = res.data.body
         })
     }
 
@@ -73,6 +84,18 @@
                 })
             })
         }
+    }
+
+    // 编辑器图片自定义处理函数
+    const handleImageAdded = (file, Editor, cursorLocation, resetUploader) => {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // 图片上传
+        proxy.$http.post('upload', formData).then(res => {
+            Editor.insertEmbed(cursorLocation, "image", res.data.url)
+            resetUploader()
+        })
     }
 
     // 有id则执行函数
