@@ -1,6 +1,6 @@
 module.exports = app => {
     const mongoose = require('mongoose')
-    const {user, pwd, port} = require('../.env.local') // 配置信息
+    const { user, pwd, port } = require('../.env.local') // 配置信息
 
     // 连接数据库
     mongoose.connect(`mongodb://${user}:${pwd}@47.97.220.112:${port}/node-vue-moba?authSource=admin`, {
