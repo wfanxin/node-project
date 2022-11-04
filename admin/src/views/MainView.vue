@@ -63,13 +63,11 @@
                         </el-icon>
                         <template #dropdown>
                             <el-dropdown-menu>
-                            <el-dropdown-item>View</el-dropdown-item>
-                            <el-dropdown-item>Add</el-dropdown-item>
-                            <el-dropdown-item>Delete</el-dropdown-item>
+                            <el-dropdown-item @click="logout">退出</el-dropdown-item>
                             </el-dropdown-menu>
                         </template>
                     </el-dropdown>
-                    <span>Wfanxin</span>
+                    <span>{{ username }}</span>
                 </div>
             </el-header>
 
@@ -85,9 +83,17 @@
     // 引入图标
     import { Setting, Notebook } from '@element-plus/icons-vue'
     import { useRouter } from 'vue-router'
+    import { ref } from 'vue'
 
     const router = useRouter() // 获取router
+    const username = ref(localStorage.username)
 
+    // 退出登录
+    const logout = () => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('username')
+        router.push('/login')
+    }
 </script>
 
 <style scoped>

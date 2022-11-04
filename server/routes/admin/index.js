@@ -75,7 +75,7 @@ module.exports = app => {
 
         // 生成token
         const token = jwt.sign({id: user._id}, secret)
-        res.send({token})
+        res.send({token, username: user.username})
     })
 
     // 错误捕获处理

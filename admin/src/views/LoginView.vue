@@ -33,6 +33,7 @@
     const submit = () => {
         proxy.$http.post('login', model).then((res)=>{
             localStorage.setItem('token', res.data.token)
+            localStorage.setItem('username', res.data.username)
             router.push('/')
         }).catch(()=>{})
     }
