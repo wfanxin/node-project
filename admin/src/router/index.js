@@ -6,7 +6,8 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: LoginView
+        component: LoginView,
+        meta: { isPublic: true }
     },
     {
         path: '/',
@@ -98,6 +99,15 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
+})
+
+// 路由拦截器
+router.beforeEach((to, from, next) => {
+    if (!to.meta.isPublic && !localStorage.token) {
+        return next('/login')
+    }
+
+    next()
 })
 
 export default router

@@ -1,12 +1,13 @@
 module.exports = app => {
     const express = require('express')
     const jwt = require('jsonwebtoken')
+    const assert = require('http-assert')
+    const AdminUser = require('../../models/AdminUser')
     const { secret } = require('../../.env.local') // 配置信息
 
     const router = express.Router({
         mergeParams: true // 为了在router中能拿到params
     })
-    const inflection = require('inflection') // 复数单词转驼峰
 
     // 新增
     router.post('/', async (req, res) => {
@@ -42,18 +43,19 @@ module.exports = app => {
         res.send(model)
     })
 
+    // 登录校验中间件
+    const authMiddleware = require('../../middleware/auth')
+
+    // 资源模型中间件
+    const resourceMiddleware = require('../../middleware/resource')
+
     // 统一处理
-    app.use('/admin/api/rest/:resource', async (req, res, next) => {
-        // 中间件处理逻辑
-        const modelName = inflection.classify(req.params.resource)
-        req.Model = require(`../../models/${modelName}`) // 加载对应的模型
-        next()
-    }, router)
+    app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(), router)
 
     // 单文件上传
     const muler = require('multer')
     const upload = muler({dest: __dirname + '/../../uploads'})
-    app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+    app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
         const file = req.file
         file.url = `http://localhost:3000/uploads/${file.filename}`
         res.send(file)
@@ -64,25 +66,22 @@ module.exports = app => {
         const {username, password} = req.body
 
         // 根据用户名找用户
-        const AdminUser = require('../../models/AdminUser')
         const user = await AdminUser.findOne({username}).select('+password')
-        console.log(user)
-        if (!user) {
-            return res.status(422).send({
-                message: '用户不存在'
-            })
-        }
+        assert(user, 422, '用户不存在')
 
         // 验证密码
         const isValid = require('bcrypt').compareSync(password, user.password)
-        if (!isValid) {
-            return res.status(422).send({
-                message: '密码错误'
-            })
-        }
+        assert(isValid, 422, '密码错误')
 
         // 生成token
         const token = jwt.sign({id: user._id}, secret)
         res.send({token})
+    })
+
+    // 错误捕获处理
+    app.use( async(err, req, res, next) => {
+        res.status(err.status).send({
+            message: err.message
+        })
     })
 }

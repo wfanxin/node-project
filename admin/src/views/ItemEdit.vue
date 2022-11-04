@@ -8,7 +8,8 @@
             <el-form-item label="图标">
                 <el-upload
                     class="avatar-uploader"
-                    :action="proxy.$http.defaults.baseURL + '/upload'"
+                    :action="uploadUrl"
+                    :headers="getAuthHeaders"
                     :show-file-list="false"
                     :on-success="handleAvatarSuccess"
                 >
@@ -28,6 +29,7 @@
     import { useRouter } from 'vue-router'
     import { ElMessage } from 'element-plus'
     import { Plus } from '@element-plus/icons-vue'
+    import { uploadUrl, getAuthHeaders } from '../upload'
 
     const { proxy } = getCurrentInstance() // 获取当前实例
 
