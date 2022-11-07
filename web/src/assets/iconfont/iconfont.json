@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "269810",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "372210",
+      "name": "cc-menu-circle",
+      "font_class": "cc-menu-circle",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "21924072",
+      "name": "英雄详情",
+      "font_class": "yingxiongxiangqing",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    }
+  ]
+}
