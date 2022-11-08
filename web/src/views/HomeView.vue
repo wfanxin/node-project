@@ -24,24 +24,20 @@
             </div>
         </div>
 
-        <div class="card bg-white p-3 mt-3">
-            <div class="card-hearder d-flex ai-center">
-                <i class="iconfont icon-cc-menu-circle"></i>
-                <div class="fs-xl flex-1 px-2">新闻资讯</div>
-                <i class="iconfont icon-more"></i>
-            </div>
-
-            <div class="card-body">
-                <div class="nav">
-                    <div class="nav-item active">
-                        <div class="nav-link">热门</div>
-                    </div>
-                    <div class="nav-item">
-                        <div class="nav-link">新闻</div>
-                    </div>
+        <m-card-list icon="cc-menu-circle" title="新闻资讯" :categories="newsCats">
+            <template #items="{category}">
+                <div class="py-2" v-for="(news, i) in category.newsList" :key="i">
+                    <span>[{{news.categoryName}}]</span>
+                    <span>|</span>
+                    <span>{{news.title}}</span>
+                    <span>{{news.date}}</span>
                 </div>
-            </div>
-        </div>
+            </template>
+        </m-card-list>
+
+        <m-card-list icon="cc-menu-circle" title="英雄列表"></m-card-list>
+        <m-card-list icon="cc-menu-circle" title="精彩视频"></m-card-list>
+        <m-card-list icon="cc-menu-circle" title="图文攻略"></m-card-list>
     </div>
 </template>
 
@@ -52,14 +48,35 @@
     import 'swiper/css'
     import 'swiper/css/pagination'
 
+    import MCardList from '../components/MCardList.vue'
+
     export default defineComponent({
         components: {
             Swiper,
-            SwiperSlide
+            SwiperSlide,
+            MCardList
         },
         setup() {
             return {
-                modules: [Pagination]
+                modules: [Pagination],
+                newsCats: [
+                    {
+                        name: '热门',
+                        newsList: new Array(5).fill({
+                            categoryName: '公告',
+                            title: '更新公告',
+                            date: '06/01'
+                        })
+                    },
+                    {
+                        name: '新闻',
+                        newsList: new Array(5).fill({
+                            categoryName: '公告',
+                            title: '更新公告',
+                            date: '06/01'
+                        })
+                    }
+                ]
             }
         }
     })

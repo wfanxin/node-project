@@ -9,6 +9,7 @@ app.use('/uploads', express.static(__dirname + '/uploads')) // uploads里面的�
 
 require('./plugins/mongodb')(app) // 连接mongodb数据库
 require('./routes/admin')(app) // admin接口服务
+require('./routes/web')(app) // web接口服务
 
 // 启动服务
 app.listen(3000, () => {

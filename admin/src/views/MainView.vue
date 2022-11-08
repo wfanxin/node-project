@@ -72,7 +72,7 @@
             </el-header>
 
             <el-main style="padding: 0 20px;">
-                <router-view />
+                <router-view :key="router.currentRoute.value.path" />
             </el-main>
         </el-container>
     </el-container>
