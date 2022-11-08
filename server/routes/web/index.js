@@ -34,13 +34,13 @@ module.exports = app => {
             name: '热门',
             newsList: await Article.find().where({
                 categories: { $in: subCats }
-            }).limit(5).lean()
+            }).populate('categories').limit(5).lean()
         })
 
         cats.map(cat => {
             cat.newsList.map(news => {
                 console.log(news.categories[0].name)
-                news.CategoryName = (cat.name === '热门') ? news.categories[0].name : cat.name
+                news.categoryName = (cat.name === '热门') ? news.categories[0].name : cat.name
                 return news
             })
             return cat

@@ -7,7 +7,10 @@
         </div>
 
         <div class="pt-3">
-            <swiper>
+            <swiper 
+                ref="list"
+                @slide-change="change"
+            >
                 <swiper-slide v-for="(category, i) in categories" :key="i">
                     <slot name="items" :category="category"></slot>
                 </swiper-slide>
@@ -33,6 +36,12 @@
             Swiper,
             SwiperSlide,
             MCard
+        },
+        methods: {
+            change(e){
+                this.active = e.activeIndex
+                console.log(this.$refs.list)
+            }
         },
         data() {
             return {

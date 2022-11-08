@@ -24,62 +24,52 @@
             </div>
         </div>
 
-        <m-card-list icon="cc-menu-circle" title="新闻资讯" :categories="newsCats">
+        <m-card-list icon="cc-menu-circle" title="新闻资讯" :categories="data.newsCats">
             <template #items="{category}">
-                <div class="py-2" v-for="(news, i) in category.newsList" :key="i">
+                <div class="py-2 d-flex" v-for="(news, i) in category.newsList" :key="i">
                     <span>[{{news.categoryName}}]</span>
                     <span>|</span>
-                    <span>{{news.title}}</span>
-                    <span>{{news.date}}</span>
+                    <span class="flex-1 text-ellipsis">{{news.title}}</span>
+                    <span>{{filters(news.updatedAt)}}</span>
                 </div>
             </template>
         </m-card-list>
 
-        <m-card-list icon="cc-menu-circle" title="英雄列表"></m-card-list>
+        <m-card-list icon="cc-menu-circle" title="英雄列表">{{newsCats}}</m-card-list>
         <m-card-list icon="cc-menu-circle" title="精彩视频"></m-card-list>
         <m-card-list icon="cc-menu-circle" title="图文攻略"></m-card-list>
     </div>
 </template>
 
-<script>
-    import { defineComponent } from 'vue'
+<script setup>
+    import { getCurrentInstance, reactive } from 'vue'
     import { Pagination } from 'swiper'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     import 'swiper/css'
     import 'swiper/css/pagination'
 
     import MCardList from '../components/MCardList.vue'
+    import dayjs from 'dayjs'
 
-    export default defineComponent({
-        components: {
-            Swiper,
-            SwiperSlide,
-            MCardList
-        },
-        setup() {
-            return {
-                modules: [Pagination],
-                newsCats: [
-                    {
-                        name: '热门',
-                        newsList: new Array(5).fill({
-                            categoryName: '公告',
-                            title: '更新公告',
-                            date: '06/01'
-                        })
-                    },
-                    {
-                        name: '新闻',
-                        newsList: new Array(5).fill({
-                            categoryName: '公告',
-                            title: '更新公告',
-                            date: '06/01'
-                        })
-                    }
-                ]
-            }
-        }
+    const modules = reactive([Pagination])
+    const { proxy } = getCurrentInstance() // 获取当前实例
+    const data = reactive({
+        newsCats: []
     })
+
+    // 请求分类函数
+    const fetchNewsCates = () => {
+        proxy.$http.get('/news/list').then(res => {
+            data.newsCats = res.data
+        })
+    }
+
+    // 执行函数
+    fetchNewsCates()
+
+    const filters = (val) => {
+        return dayjs(val).format('MM/DD')
+    }
 </script>
 
 <style lang="scss">
