@@ -12,13 +12,14 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
+<script setup>
+    import { defineProps } from 'vue'
+
+    // 指定props变量
+    defineProps({
         title: { type: String, required: true },
         icon: { type: String, required: true },
-    }
-};
+    })
 </script>
 
 <style lang="scss">

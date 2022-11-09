@@ -26,11 +26,11 @@
 
         <m-card-list icon="cc-menu-circle" title="新闻资讯" :categories="data.newsCats">
             <template #items="{category}">
-                <div class="py-2 d-flex" v-for="(news, i) in category.newsList" :key="i">
-                    <span>[{{news.categoryName}}]</span>
-                    <span>|</span>
-                    <span class="flex-1 text-ellipsis">{{news.title}}</span>
-                    <span>{{filters(news.updatedAt)}}</span>
+                <div class="py-2 d-flex fs-lg" v-for="(news, i) in category.newsList" :key="i">
+                    <span class="text-info">[{{news.categoryName}}]</span>
+                    <span class="px-2">|</span>
+                    <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
+                    <span class="text-grey-1 fs-sm">{{filters(news.updatedAt)}}</span>
                 </div>
             </template>
         </m-card-list>

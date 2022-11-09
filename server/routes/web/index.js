@@ -39,7 +39,6 @@ module.exports = app => {
 
         cats.map(cat => {
             cat.newsList.map(news => {
-                console.log(news.categories[0].name)
                 news.categoryName = (cat.name === '热门') ? news.categories[0].name : cat.name
                 return news
             })

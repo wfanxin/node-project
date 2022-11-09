@@ -23,26 +23,12 @@
             </div>
         </div>
 
-        <router-view/>
+        <router-view />
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            
-        };
-    },
+<script setup>
 
-    mounted() {
-        
-    },
-
-    methods: {
-        
-    },
-};
 </script>
 
 <style lang="scss">
