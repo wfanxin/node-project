@@ -8,7 +8,7 @@
 
         <div class="pt-3">
             <swiper 
-                @slide-change="change"
+                @slide-change="onChange"
                 @swiper="onSwiper"
             >
                 <swiper-slide v-for="(category, i) in categories" :key="i">
@@ -36,7 +36,7 @@
 
     // 定义变量
     let active = ref(0)
-    const change = (e) => {
+    const onChange = (e) => {
         active.value = e.activeIndex
     }
 

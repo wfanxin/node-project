@@ -24,6 +24,7 @@
             </div>
         </div>
 
+        <!-- 新闻资讯 -->
         <m-card-list icon="cc-menu-circle" title="新闻资讯" :categories="data.newsCats">
             <template #items="{category}">
                 <div class="py-2 d-flex fs-lg" v-for="(news, i) in category.newsList" :key="i">
@@ -35,9 +36,17 @@
             </template>
         </m-card-list>
 
-        <m-card-list icon="cc-menu-circle" title="英雄列表">{{newsCats}}</m-card-list>
-        <m-card-list icon="cc-menu-circle" title="精彩视频"></m-card-list>
-        <m-card-list icon="cc-menu-circle" title="图文攻略"></m-card-list>
+        <!-- 英雄列表 -->
+        <m-card-list icon="yingxiongxiangqing" title="英雄列表" :categories="data.heroCats">
+            <template #items="{category}">
+                <div class="d-flex flex-wrap" style="margin: 0 -0.5rem;">
+                    <div class="p-2 text-center" style="width: 20%;" v-for="(hero, i) in category.heroList" :key="i">
+                        <img :src="hero.avatar" class="w-100 images-radius">
+                        <div>{{ hero.name }}</div>
+                    </div>
+                </div>
+            </template>
+        </m-card-list>
     </div>
 </template>
 
@@ -54,10 +63,11 @@
     const modules = reactive([Pagination])
     const { proxy } = getCurrentInstance() // 获取当前实例
     const data = reactive({
-        newsCats: []
+        newsCats: [],
+        heroCats: []
     })
 
-    // 请求分类函数
+    // 请求新闻分类函数
     const fetchNewsCates = () => {
         proxy.$http.get('/news/list').then(res => {
             data.newsCats = res.data
@@ -66,6 +76,16 @@
 
     // 执行函数
     fetchNewsCates()
+
+    // 请求英雄分类函数
+    const fetchHeroCates = () => {
+        proxy.$http.get('/heros/list').then(res => {
+            data.heroCats = res.data
+        })
+    }
+
+    // 执行函数
+    fetchHeroCates()
 
     const filters = (val) => {
         return dayjs(val).format('MM/DD')
@@ -97,5 +117,12 @@
                 border-left: none;
             }
         }
+    }
+
+    .images-radius{
+        height: 4rem;
+        border-top-right-radius: .5rem;
+        height: 4rem;
+        border-bottom-left-radius: .5rem;
     }
 </style>
