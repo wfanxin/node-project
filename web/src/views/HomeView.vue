@@ -27,7 +27,7 @@
         <!-- 新闻资讯 -->
         <m-card-list icon="cc-menu-circle" title="新闻资讯" :categories="data.newsCats">
             <template #items="{category}">
-                <div class="py-2 d-flex fs-lg" v-for="(news, i) in category.newsList" :key="i">
+                <div class="py-2 d-flex fs-lg" v-for="(news, i) in category.newsList" :key="i" @click="goDetail(news._id, 'articles')">
                     <span class="text-info">[{{news.categoryName}}]</span>
                     <span class="px-2">|</span>
                     <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{news.title}}</span>
@@ -40,7 +40,7 @@
         <m-card-list icon="yingxiongxiangqing" title="英雄列表" :categories="data.heroCats">
             <template #items="{category}">
                 <div class="d-flex flex-wrap" style="margin: 0 -0.5rem;">
-                    <div class="p-2 text-center" style="width: 20%;" v-for="(hero, i) in category.heroList" :key="i">
+                    <div class="p-2 text-center" style="width: 20%;" v-for="(hero, i) in category.heroList" :key="i" @click="goDetail(hero._id, 'heros')">
                         <img :src="hero.avatar" class="w-100 images-radius">
                         <div>{{ hero.name }}</div>
                     </div>
@@ -52,6 +52,7 @@
 
 <script setup>
     import { getCurrentInstance, reactive } from 'vue'
+    import { useRouter } from 'vue-router'
     import { Pagination } from 'swiper'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     import 'swiper/css'
@@ -89,6 +90,13 @@
 
     const filters = (val) => {
         return dayjs(val).format('MM/DD')
+    }
+
+    const router = useRouter() // 获取router
+
+    // 定义跳转详情的函数
+    const goDetail = (id, category) => {
+        router.push(`/${category}/${id}`)
     }
 </script>
 
