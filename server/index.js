@@ -5,6 +5,9 @@ const app = express()
 
 app.use(cors()) // 解决CORS跨域
 app.use(express.json()) // 调用 express.json() 解析带有 JSON 的传入请求
+
+app.use('/', express.static(__dirname + '/web')) // web里面的项目用/来访问
+app.use('/admin', express.static(__dirname + '/admin')) // admin里面的项目用/admin来访问
 app.use('/uploads', express.static(__dirname + '/uploads')) // uploads里面的图片可以用/uploads来访问
 
 require('./plugins/mongodb')(app) // 连接mongodb数据库
