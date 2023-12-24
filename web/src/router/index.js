@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
+// import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import MainView from '../views/MainView.vue'
 
 const routes = [
@@ -29,7 +30,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  // history: createWebHistory(process.env.BASE_URL), // 历史模式
+  history: createWebHashHistory(process.env.BASE_URL), // Hash模式
   routes
 })
 
