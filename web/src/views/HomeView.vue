@@ -12,7 +12,7 @@
             </swiper-slide>
         </swiper>
 
-        <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-1">
+        <!-- <div class="nav-icons bg-white mt-3 text-center pt-3 text-dark-1">
             <div class="d-flex flex-wrap">
                 <div class="nav-item mb-3" v-for="n in 10" :key="n">
                     <i class="sprite"></i>
@@ -22,7 +22,7 @@
             <div class="bg-light py-2">
                 收起
             </div>
-        </div>
+        </div> -->
 
         <!-- 新闻资讯 -->
         <m-card-list icon="cc-menu-circle" title="新闻资讯" :categories="data.newsCats">
